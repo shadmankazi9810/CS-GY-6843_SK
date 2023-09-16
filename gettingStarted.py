@@ -19,7 +19,7 @@ def welcome_assignment_answers(question):
     elif question == "What is the SHA256 hashing value of your NYU email and use the answer in your code - ":
         answer = "d4a7818f2dbb2ae2c2a6a29b6839f184f71132b5c6c2c3702b92dee395e13653"
     elif question == "Is MD5 a secured hashing algorithm? - Yes/No":
-        answer = "No"
+        answer = ""
     elif question == ("What layer of the TCP/IP model does the protocol DNS belong to? "
                       "- The answer should be an integer number"):
         answer = 5

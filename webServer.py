@@ -1,5 +1,9 @@
-# import socket module
+## import socket module
 from socket import *
+
+
+# In order to terminate the program
+
 
 def webServer(port=13331):
     serverSocket = socket(AF_INET, SOCK_STREAM)
@@ -22,18 +26,14 @@ def webServer(port=13331):
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
-            f = open(filename[1:])
-            fileText = f.read()  # fill in start #fill in end)
+            f = open(filename[1:])  # fill in start #fill in end)
             # fill in end
 
             # This variable can store the headers you want to send for any valid or invalid request.   What header should be sent for a response that is ok?
             # Fill in start
 
             # Content-Type is an example on how to send a header as bytes. There are more!
-            contentType = b"Content-Type: text/html; charset=UTF-8\r\n"
-            connectionSocket.send(contentType)
-            connectionSocket.send("\nHTTP/1.1 200 OK\r\n")
-            connectionSocket.send("\r\n\r\n")
+            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
 
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
 
@@ -41,12 +41,10 @@ def webServer(port=13331):
 
             for i in f:  # for line in file
                 # Fill in start - append your html file contents #Fill in end
-                connectionSocket.send(fileText[i].encode())
-            connectionSocket.send("\r\n".encode())
-            connectionSocket.close()
+                connectionSocket.send(i.encode())
             # Send the content of the requested file to the client (don't forget the headers you created)!
             # Fill in start
-
+            connectionSocket.send(b"\r\n\r\n")
             # Fill in end
 
             connectionSocket.close()  # closing the connection socket
@@ -55,16 +53,15 @@ def webServer(port=13331):
             # Send response message for invalid request due to the file not being found (404)
             # Remember the format you used in the try: block!
             # Fill in start
-            connectionSocket.send("HTTP/1.1 404 Not Found\r\n")
-            connectionSocket.send("Content-Type: text/html\r\n")
-            connectionSocket.send("\r\n")
-            connectionSocket.send("<html><head></head><body><h1>404 Not Found</h1></body></html><\r\n>")
-
+            connectionSocket.send(b"HTTP/1.1 404 Not Found\r\n")
+            connectionSocket.send(b"Content-Type: text/html\r\n")
+            connectionSocket.send(b"\r\n")
+            connectionSocket.send(b"<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n")
             # Fill in end
 
             # Close client socket
             # Fill in start
-            serverSocket.close()
+            connectionSocket.close()
             # Fill in end
 
     # Commenting out the below, as its technically not required and some students have moved it erroneously in the While loop. DO NOT DO THAT OR YOURE GONNA HAVE A BAD TIME.

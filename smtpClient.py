@@ -32,8 +32,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     mailFromCommand = 'Mail from: <yourmail@mail.com>\r\n.'
     clientSocket.send(mailFromCommand)
     recv2 = clientSocket.recv(1024)
-    if recv2[:3] != '250':
-        print('250 reply not received from server.')
+    if recv2[:3] != '220':
+        print('220 reply not received from server.')
     # Fill in end
 
     # Send RCPT TO command and handle server response.
@@ -47,23 +47,26 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send DATA command and handle server response.
     # Fill in start
-    dataCommand = 'DATA.'
+    dataCommand = 'DATA\r\n'
     clientSocket.send(dataCommand)
     recv4 = clientSocket.recv(1024)
-    if recv4[:3] != '250':
-        print('250 reply not received from server.')
+    if recv4[:3] != '354':
+        print('354 reply not received from server.')
     # Fill in end
 
     # Send message data.
     # Fill in start
     clientSocket.send(msg)
+    recv5 = clientSocket.recv(1024)
+    if recv5[:3] != '250':
+        print('250 reply not received from server.')
     # Fill in end
 
     # Message ends with a single period, send message end and handle server response.
     # Fill in start
     clientSocket.send(endmsg)
-    recv5 = clientSocket.recv(1024)
-    if recv5[:3] != '250':
+    recv6 = clientSocket.recv(1024)
+    if recv6[:3] != '250':
         print('250 reply not received from server.')
     # Fill in end
 
@@ -71,9 +74,9 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Fill in start
     quitCommand = 'QUIT\r\n'
     clientSocket.send(quitCommand)
-    recv6 = clientSocket.recv(1024)
-    if recv6[:3] != '250':
-        print('250 reply not received from server.')
+    recv7 = clientSocket.recv(1024)
+    if recv7[:3] != '221':
+        print('221 reply not received from server.')
     # Fill in end
 
 

@@ -1,5 +1,5 @@
 from socket import *
-import base64
+
 
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
@@ -24,7 +24,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     heloCommand = 'HELO Alice\r\n'
     clientSocket.send(heloCommand.encode())
     recv1 = clientSocket.recv(1024).decode()
-    print(recv1)
+    #print(recv1)
     #if recv1[:3] != '250':
         #print('250 reply not received from server.')
 
@@ -58,15 +58,12 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Send message data.
     # Fill in start
     clientSocket.send(msg.encode())
-    recv5 = clientSocket.recv(1024).decode()
-    #if recv5[:3] != '250':
-        #print('250 reply not received from server.')
     # Fill in end
 
     # Message ends with a single period, send message end and handle server response.
     # Fill in start
     clientSocket.send(endmsg.encode())
-    recv6 = clientSocket.recv(1024).decode()
+    recv5 = clientSocket.recv(1024).decode()
     #if recv6[:3] != '250':
         #print('250 reply not received from server.')
     # Fill in end
@@ -75,7 +72,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Fill in start
     quitCommand = 'QUIT\r\n'
     clientSocket.send(quitCommand.encode())
-    recv7 = clientSocket.recv(1024).decode()
+    recv6 = clientSocket.recv(1024).decode()
     clientSocket.close()
     #if recv7[:3] != '221':
         #print('221 reply not received from server.')

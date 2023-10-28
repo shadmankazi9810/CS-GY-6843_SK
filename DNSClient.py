@@ -12,7 +12,7 @@ domainList  = ['example.com.','safebank.com','google.com','nyu.edu','legitsite.c
 def query_local_dns_server(domain, question_type):
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [local_host_ip]
-    answers = dns.resolver.resolve(domain, question_type) # provide the domain and question_type
+    answers = resolver.resolve(domain, question_type) # provide the domain and question_type
 
     ip_address = answers[0].to_text()
     return ip_address
@@ -21,7 +21,7 @@ def query_local_dns_server(domain, question_type):
 def query_dns_server(domain, question_type):
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [real_name_server]
-    answers = dns.resolver.resolve(domain, question_type) # provide the domain and question_type
+    answers = resolver.resolve(domain, question_type) # provide the domain and question_type
 
     ip_address = answers[0].to_text()
     return ip_address

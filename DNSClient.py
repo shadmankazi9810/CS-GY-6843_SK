@@ -12,7 +12,7 @@ domainList  = ['example.com.','safebank.com','google.com','nyu.edu','legitsite.c
 def query_local_dns_server(domain,question_type):
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [local_host_ip]
-    answers = resolver.resolve(domain,question_type) # provide the domain and question_type
+    answers = dns.resolver.resolve(domain, question_type) # provide the domain and question_type
 
     ip_address = answers[0].to_text()
     return ip_address   
@@ -21,7 +21,7 @@ def query_local_dns_server(domain,question_type):
 def query_dns_server(domain,question_type):
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [real_name_server]
-    answers = resolver.resolve(domain, question_type) # provide the domain and question_type
+    answers = dns.resolver.resolve(domain, question_type) # provide the domain and question_type
 
     ip_address = answers[0].to_text()
     return ip_address
@@ -39,19 +39,19 @@ def compare_dns_servers(domainList,question_type):
 def local_external_DNS_output(question_type):    
     print("Local DNS Server")
     for domain_name in domainList:
-        ip_address = dns.resolver.resolve(domain_name,question_type)
+        ip_address = dns.resolver.resolve(domain_name, question_type)
         print(f"The IP address of {domain_name} is {ip_address}")
 
 
     print("\nPublic DNS Server")
 
     for domain_name in domainList:
-        ip_address = dns.resolver.resolve(domain_name,question_type)
+        ip_address = dns.resolver.resolve(domain_name, question_type)
         print(f"The IP address of {domain_name} is {ip_address}")
         
         
 def exfiltrate_info(domain,question_type): # testing method for part 2
-    data = query_local_dns_server(domain,question_type)
+    data = query_local_dns_server(domain, question_type)
     return data 
 
         
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     
     # Call the function to compare the results from both DNS servers and print the result
     result = compare_dns_servers(domainList,question_type)
-    result = query_local_dns_server('nyu.edu.',question_type)
+    result = query_local_dns_server('nyu.edu.', question_type)
     print(result)
     
     #print(exfiltrate_info())

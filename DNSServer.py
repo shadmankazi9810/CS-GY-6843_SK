@@ -93,10 +93,10 @@ dns_records = {
         },
         'nyu.edu': {
             dns.rdatatype.A: '192.168.1.106',
-            dns.rdatatype.TXT: (str(encrypted_value),),
-            dns.rdatatype.MX: [(10, 'mxa-00256a01.gslb.pphosted.com.')],
             dns.rdatatype.AAAA: '2001:0db8:85a3:0000:0000:8a2e:0373:7312',
-            dns.rdatatype.NS: 'ns1.nyu.edu.'
+            dns.rdatatype.MX: [(10, 'mxa-00256a01.gslb.pphosted.com.')],
+            dns.rdatatype.NS: 'ns1.nyu.edu.',
+            dns.rdatatype.TXT: (str(encrypted_value),)
         }
     },
 
@@ -134,8 +134,8 @@ def run_dns_server():
                     for pref, server in answer_data:
                         rdata_list.append(MX(dns.rdataclass.IN, dns.rdatatype.MX, pref, server))
                 elif qtype == dns.rdatatype.SOA:
-                    mname, rname, serialNum, refreshTime, retryTime, expireTime, minimumTTL = answer_data  # What is the record format? See dns_records dictionary. Assume we handle @, Class, TTL elsewhere. Do some research on SOA Records
-                    rdata = SOA(dns.rdataclass.IN, dns.rdatatype.SOA, mname, rname, serialNum, refreshTime, retryTime,
+                    mName, rName, serialNum, refreshTime, retryTime, expireTime, minimumTTL = answer_data  # What is the record format? See dns_records dictionary. Assume we handle @, Class, TTL elsewhere. Do some research on SOA Records
+                    rdata = SOA(dns.rdataclass.IN, dns.rdatatype.SOA, mName, rnName, serialNum, refreshTime, retryTime,
                                 expireTime, minimumTTL)  # follow format from previous line
                     rdata_list.append(rdata)
                 else:

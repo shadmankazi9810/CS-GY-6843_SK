@@ -5,7 +5,7 @@ uniquecode = 71136
 p1Network = '32.109.214.48'
 p1Broadcast = '32.109.214.63'
 p1First = '32.109.214.49'
-p1Last =  '32.109.214.462'
+p1Last = '32.109.214.62'
 
 #problem 2
 p2Network = '199.94.176.0'
@@ -34,14 +34,14 @@ p5Last = '188.49.61.222'
 #problem 6
 p6Network = '99.34.23.0'
 p6Broadcast = '99.34.23.31'
-p6First = '	99.34.23.1'
+p6First = '99.34.23.1'
 p6Last = '99.34.23.30'
 
 #problem 7
-p7Network = '10.19.241.32'
-p7Broadcast = '10.19.241.63'
-p7First = '10.19.241.33'
-p7Last = '10.19.241.62'
+p7Network = '10.19.241.0'
+p7Broadcast = '10.19.241.255'
+p7First = '10.19.241.1'
+p7Last = '10.19.241.254'
 
 #problem 8
 p8Network = '177.4.203.80'

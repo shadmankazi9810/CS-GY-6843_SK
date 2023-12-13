@@ -150,16 +150,16 @@ def dns_query(type, name, server):
         rdata = response_answer[offset:offset+rdlength]
         offset += rdlength
 
-        if type == 'A':  # Lookup Type value
+        if type == 1: # Lookup Type value
             # A record (IPv4 address)
             ipv4 = socket.inet_ntop(socket.AF_INET, rdata)
             print(f'{name} has IPv4 address {ipv4}')
             return ipv4
-        elif type == 'AAAA': # Lookup Type value
+        elif type == 28: # Lookup Type value
             # AAAA record (IPv6 address)
             ipv6 = socket.inet_ntop(socket.AF_INET6, rdata)
             print(f'{name} has IPv6 address {ipv6}')
-            return ipv6                
+            return ipv6            
 
 def parse_name(data, offset):
     name_parts = []

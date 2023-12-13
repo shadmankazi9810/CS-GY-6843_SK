@@ -100,7 +100,7 @@ def dns_query(type, name, server):
     question = qname_encoded + struct.pack('!HH', qtype, qclass)
 
     # Send the query to the server, remember we must always include our header alongside the question!
-    message = question + header
+    message = header + question
     sent = sock.sendto(message, server_address)
 
     # Receive the response from the server
